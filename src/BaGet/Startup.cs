@@ -50,7 +50,8 @@ namespace BaGet
             services.AddTransient(DependencyInjectionExtensions.GetServiceFromProviders<ISearchIndexer>);
 
             services.AddSingleton<IConfigureOptions<MvcRazorRuntimeCompilationOptions>, ConfigureRazorRuntimeCompilation>();
-
+            
+            services.AddLettuceEncrypt();
             services.AddCors();
         }
 
@@ -100,6 +101,9 @@ namespace BaGet
 
                 baget.MapEndpoints(endpoints);
             });
+
+            // Reloaded-II Stuff
+            app.UseHttpsRedirection();
         }
     }
 }
