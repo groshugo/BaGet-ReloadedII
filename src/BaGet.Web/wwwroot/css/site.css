@@ -79,6 +79,10 @@ a:hover, a:focus {
   background-color: #452121;
 }
 
+.progress {
+  background-color: #333333;
+}
+
 /* Reloaded Controls
 -------------------------------------------------- */
 

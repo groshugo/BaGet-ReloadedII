@@ -1,26 +1,28 @@
 @page
+@using BaGet.Web.Reloaded.Models
 @inject IUrlGenerator _url
 
 @{
     ViewData["Title"] = "Upload package";
 
     var baseUrl = Url.PageLink("/Index");
-    var publishUrl = _url.GetPackagePublishResourceUrl();
     var serviceIndexUrl = _url.GetServiceIndexUrl();
+
+    var storage = new LocalStorageSpace();
+    var uploadProgressString  = $"{storage.BytesConsumedGB} / {storage.TotalBytesGB} GB";
+    var uploadProgressPercent = (storage.BytesConsumed / (double)storage.TotalBytes) * 100;
 }
 
 <div class="col-sm-12">
-    <!-- TODO: Add later
     <h1>Storage Usage</h1>
 
-    <div className="progress">
-        <div className="progress-bar progress-bar-danger"
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger"
              role="progressbar"
-             style={{width: percentageStorageConsumedString}}>
-            {this.toGigabytes(this.state.storageSpace.bytesConsumed)}GB / {this.toGigabytes(this.state.storageSpace.totalBytes)}GB
+             style="width: @uploadProgressPercent%">
+            @uploadProgressString
         </div>
     </div>
-    -->
 
     <h1>Rules of Uploading</h1>
 
