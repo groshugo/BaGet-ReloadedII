@@ -5,10 +5,10 @@ namespace BaGet.Core
     public class BaGetOptions
     {
         /// <summary>
-        /// The API Key required to authenticate package
-        /// operations. If empty, package operations do not require authentication.
+        /// The Master API Key required to authenticate package operations.
+        /// Otherwise uses specified per package key.
         /// </summary>
-        public string ApiKey { get; set; }
+        public string MasterKey { get; set; }
 
         /// <summary>
         /// The application root URL for usage in reverse proxy scenarios.

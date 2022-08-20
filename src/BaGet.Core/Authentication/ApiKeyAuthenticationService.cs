@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
 namespace BaGet.Core
@@ -13,18 +12,23 @@ namespace BaGet.Core
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
 
-            _apiKey = string.IsNullOrEmpty(options.Value.ApiKey) ? null : options.Value.ApiKey;
+            _apiKey = string.IsNullOrEmpty(options.Value.MasterKey) ? null : options.Value.MasterKey;
         }
 
-        public Task<bool> AuthenticateAsync(string apiKey, CancellationToken cancellationToken)
-            => Task.FromResult(Authenticate(apiKey));
+        public bool Authenticate(string apiKey, string packageKey, CancellationToken token) => Authenticate(apiKey, packageKey);
 
-        private bool Authenticate(string apiKey)
+        public bool Authenticate(string apiKey, string packageKey)
         {
-            // No authentication is necessary if there is no required API key.
-            if (_apiKey == null) return true;
+            // Check Master Key
+            if (_apiKey == apiKey)
+                return true;
 
-            return _apiKey == apiKey;
+            // Check Optional Package Key
+            if (!string.IsNullOrEmpty(packageKey))
+                return apiKey == packageKey;
+
+            // Authenticate if neither is set.
+            return true;
         }
     }
 }

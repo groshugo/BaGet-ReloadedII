@@ -32,11 +32,20 @@ namespace BaGet.Core
     public interface IPackageIndexingService
     {
         /// <summary>
+        /// Retrieves the metadata of a given package without advancing the stream.
+        /// Can be used to perform additional verification before passing the package on to the indexer.
+        /// </summary>
+        /// <param name="packageStream">The stream.</param>
+        /// <returns>Package metadata, else null if the operation failed.</returns>
+        Package GetPackageMetadata(Stream packageStream);
+
+        /// <summary>
         /// Attempt to index a new package.
         /// </summary>
         /// <param name="stream">The stream containing the package's content.</param>
+        /// <param name="apiKey">The API key associated with initial upload of the package.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>The result of the attempted indexing operation.</returns>
-        Task<PackageIndexingResult> IndexAsync(Stream stream, CancellationToken cancellationToken);
+        Task<PackageIndexingResult> IndexAsync(Stream stream, string apiKey, CancellationToken cancellationToken);
     }
 }

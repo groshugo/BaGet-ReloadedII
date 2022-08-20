@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,33 @@ namespace BaGet.Core
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<PackageIndexingResult> IndexAsync(Stream packageStream, CancellationToken cancellationToken)
+        /// <summary>
+        /// Retrieves the metadata of a given package without advancing the stream.
+        /// </summary>
+        public Package GetPackageMetadata(Stream packageStream)
+        {
+            // Try to extract all the necessary information from the package.
+            Package package = null;
+            var position = packageStream.Position;
+
+            try
+            {
+                using var packageReader = new PackageArchiveReader(packageStream, leaveStreamOpen: true);
+                package = packageReader.GetPackageMetadata();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "GetPackageMetadata: Uploaded package is invalid");
+                packageStream.Position = position;
+                return package;
+            }
+
+            packageStream.Position = position;
+            return package;
+        }
+
+
+        public async Task<PackageIndexingResult> IndexAsync(Stream packageStream, string apiKey, CancellationToken cancellationToken)
         {
             // Try to extract all the necessary information from the package.
             Package package;
@@ -47,6 +74,7 @@ namespace BaGet.Core
                 {
                     package = packageReader.GetPackageMetadata();
                     package.Published = _time.UtcNow;
+                    package.ApiKey = apiKey;
 
                     nuspecStream = await packageReader.GetNuspecAsync(cancellationToken);
                     nuspecStream = await nuspecStream.AsTemporaryFileStreamAsync(cancellationToken);

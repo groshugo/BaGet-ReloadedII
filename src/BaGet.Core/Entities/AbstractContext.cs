@@ -7,7 +7,7 @@ namespace BaGet.Core
 {
     public abstract class AbstractContext<TContext> : DbContext, IContext where TContext : DbContext
     {
-        public const int DefaultMaxStringLength = 4000;
+        public const int DefaultMaxStringLength = 32767;
 
         public const int MaxPackageIdLength = 128;
         public const int MaxPackageVersionLength = 64;

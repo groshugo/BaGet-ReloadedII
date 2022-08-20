@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using NuGet.Versioning;
 
 namespace BaGet.Core
@@ -30,6 +31,8 @@ namespace BaGet.Core
             }
         }
 
+        [MaxLength(128)]
+        public string ApiKey { get; set; } // API Key associated with Reloaded-II implementation.
         public string[] Authors { get; set; }
         public string Description { get; set; }
         public long Downloads { get; set; }

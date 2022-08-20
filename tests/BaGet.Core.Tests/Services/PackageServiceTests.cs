@@ -283,7 +283,7 @@ namespace BaGet.Core.Tests
                 await TargetAsync();
 
                 _indexer.Verify(
-                    i => i.IndexAsync(It.IsAny<Stream>(), _cancellationToken),
+                    i => i.IndexAsync(It.IsAny<Stream>(), "", _cancellationToken),
                     Times.Never);
             }
 
@@ -301,7 +301,7 @@ namespace BaGet.Core.Tests
                 await TargetAsync();
 
                 _indexer.Verify(
-                    i => i.IndexAsync(It.IsAny<Stream>(), _cancellationToken),
+                    i => i.IndexAsync(It.IsAny<Stream>(), "", _cancellationToken),
                     Times.Never);
             }
 
@@ -319,7 +319,7 @@ namespace BaGet.Core.Tests
                 await TargetAsync();
 
                 _indexer.Verify(
-                    i => i.IndexAsync(It.IsAny<Stream>(), _cancellationToken),
+                    i => i.IndexAsync(It.IsAny<Stream>(), "", _cancellationToken),
                     Times.Never);
             }
 
@@ -339,7 +339,7 @@ namespace BaGet.Core.Tests
                     await TargetAsync();
 
                     _indexer.Verify(
-                        i => i.IndexAsync(It.IsAny<Stream>(), _cancellationToken),
+                        i => i.IndexAsync(It.IsAny<Stream>(), "", _cancellationToken),
                         Times.Once);
                 }
             }

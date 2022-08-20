@@ -37,8 +37,7 @@ namespace BaGet.Web
         // See: https://docs.microsoft.com/en-us/nuget/api/package-publish-resource#push-a-package
         public async Task Upload(CancellationToken cancellationToken)
         {
-            if (_options.Value.IsReadOnlyMode ||
-                !await _authentication.AuthenticateAsync(Request.GetApiKey(), cancellationToken))
+            if (_options.Value.IsReadOnlyMode || !_authentication.Authenticate(Request.GetApiKey(), null, default))
             {
                 HttpContext.Response.StatusCode = 401;
                 return;
@@ -54,7 +53,24 @@ namespace BaGet.Web
                         return;
                     }
 
-                    var result = await _indexer.IndexAsync(uploadStream, cancellationToken);
+                    // Get API Key for Package
+                    var package = _indexer.GetPackageMetadata(uploadStream);
+                    string packageApiKey = null;
+                    if (package != null)
+                    {
+                        packageApiKey = await GetApiKeyForPackageAsync(package.Id);
+                    }
+
+                    // Authenticate Package Upload
+                    if (!_authentication.Authenticate(Request.GetApiKey(), packageApiKey, default))
+                    {
+                        HttpContext.Response.StatusCode = 401;
+                        return;
+                    }
+
+                    // If package API Key retrieval failed earlier; set the API key to the requested one.
+                    packageApiKey = packageApiKey ?? Request.GetApiKey();
+                    var result = await _indexer.IndexAsync(uploadStream, packageApiKey, cancellationToken);
 
                     switch (result)
                     {
@@ -93,7 +109,9 @@ namespace BaGet.Web
                 return NotFound();
             }
 
-            if (!await _authentication.AuthenticateAsync(Request.GetApiKey(), cancellationToken))
+            // Check API Key
+            var apiKey = (await GetApiKeyForPackageAsync(id));
+            if (!_authentication.Authenticate(Request.GetApiKey(), apiKey, cancellationToken))
             {
                 return Unauthorized();
             }
@@ -121,7 +139,8 @@ namespace BaGet.Web
                 return NotFound();
             }
 
-            if (!await _authentication.AuthenticateAsync(Request.GetApiKey(), cancellationToken))
+            var apiKey = (await GetApiKeyForPackageAsync(id));
+            if (!_authentication.Authenticate(Request.GetApiKey(), apiKey, cancellationToken))
             {
                 return Unauthorized();
             }
@@ -134,6 +153,28 @@ namespace BaGet.Web
             {
                 return NotFound();
             }
+        }
+
+        /// <summary>
+        /// Gets the API key assigned to a package, excluding the master key.
+        /// </summary>
+        /// <returns>API Key if Present, else null if API Key is Master Key or no package exists.</returns>
+        private async Task<string> GetApiKeyForPackageAsync(string packageId)
+        {
+            var masterKey = _options.Value.MasterKey;
+            var existingPackages = await _packages.FindAsync(packageId, true, default);
+
+            if (existingPackages.Count > 0)
+            {
+                for (var x = existingPackages.Count - 1; x >= 0; x--)
+                {
+                    var package = existingPackages[x];
+                    if (package.ApiKey != masterKey && package.ApiKey != null)
+                        return package.ApiKey;
+                }
+            }
+
+            return null;
         }
     }
 }

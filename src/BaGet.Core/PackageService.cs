@@ -123,7 +123,7 @@ namespace BaGet.Core
                         id,
                         version);
 
-                    var result = await _indexer.IndexAsync(packageStream, cancellationToken);
+                    var result = await _indexer.IndexAsync(packageStream, "", cancellationToken);
 
                     _logger.LogInformation(
                         "Finished indexing package {PackageId} {PackageVersion} from upstream feed with result {Result}",
