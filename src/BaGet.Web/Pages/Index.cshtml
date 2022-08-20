@@ -18,14 +18,16 @@
 }
 
 <div class="search-options form-inline">
-    <div class="form-group form-check">
-        <label for="prerelease">Include prerelease:</label>
+    <div class="form-group checkbox">
+        <label>
+            <input type="checkbox"
+                   id="prerelease"
+                   @(Model.Prerelease ? "checked='checked'" : "")
+                   onclick="window.location.href='@SearchLink(prerelease: !Model.Prerelease, page: 1)'">
 
-        <input
-            type="checkbox"
-            id="prerelease"
-            @(Model.Prerelease ? "checked='checked'" : "")
-            onclick="window.location.href='@SearchLink(prerelease: !Model.Prerelease, page: 1)'" />
+            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+            Include prerelease.
+        </label>
     </div>
 </div>
 

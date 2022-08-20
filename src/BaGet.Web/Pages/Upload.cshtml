@@ -1,4 +1,4 @@
-﻿@page
+@page
 @inject IUrlGenerator _url
 
 @{
@@ -72,17 +72,6 @@
             name: "Paket",
             content: ["paket push --url @baseUrl package.nupkg"],
             documentation: "https://fsprojects.github.io/Paket/paket-push.html",
-        },
-
-        // TODO: This is broken...
-        {
-            name: "PowerShellGet",
-            content: [
-                "Register-PSRepository -Name \"BaGet\" -SourceLocation \"@serviceIndexUrl\" "
-                  + "-PublishLocation \"@publishUrl\" -InstallationPolicy \"Trusted\"",
-                "Publish-Module -Name PS-Module -Repository BaGet"
-            ],
-            documentation: "https://docs.microsoft.com/en-us/powershell/module/powershellget/publish-module",
-        },
+        }
     ];
 </script>

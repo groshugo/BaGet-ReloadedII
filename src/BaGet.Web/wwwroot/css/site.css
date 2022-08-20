@@ -1,5 +1,128 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+
+/* Reloaded Overrides for Bootstrap Defaults
+-------------------------------------------------- */
+.bg-info {
+  background-color: transparent;
+}
+
+.form-control:focus {
+  border-color: #793939;
+}
+
+.btn-warning:active, .btn-warning.active, .open > .dropdown-toggle.btn-warning {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #333333;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+  outline: 0px auto #793939;
+  outline-offset: 0px;
+}
+
+.btn-warning:active:hover, .btn-warning.active:hover, .open > .dropdown-toggle.btn-warning:hover, .btn-warning:active:focus, .btn-warning.active:focus, .open > .dropdown-toggle.btn-warning:focus, .btn-warning:active.focus, .btn-warning.active.focus, .open > .dropdown-toggle.btn-warning.focus {
+  color: #ffffff;
+  background-color: #4c4c4c;
+  border-color: #4c4c4c;
+}
+
+.btn-warning {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #333333;
+}
+
+.btn-warning:hover {
+  color: #ffffff;
+  background-color: #4c4c4c;
+  border-color: #4c4c4c;
+}
+
+.btn-warning:hover {
+  color: #ffffff;
+  background-color: #4c4c4c;
+  border-color: #4c4c4c;
+}
+
+.btn-warning:focus, .btn-warning.focus {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #333333;
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #B66363;
+  background-color: #333333;
+  border-radius: 4px;
+}
+
+html body {
+  color: #e3ebf1;
+  background-color: #181818;
+}
+
+a {
+  color: #B66363;
+}
+
+a:hover, a:focus {
+  color: #d6a8a8;
+  text-decoration: underline;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #452121;
+}
+
+/* Reloaded Controls
+-------------------------------------------------- */
+
+.checkbox label:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.checkbox .cr {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #a9a9a9;
+  border-radius: .25em;
+  width: 1.2em;
+  height: 1.2em;
+  float: left;
+  margin-top: .15em;
+  margin-right: .5em;
+}
+
+.checkbox .cr .cr-icon {
+  position: absolute;
+  font-size: .8em;
+  line-height: 0;
+  top: 50%;
+  left: 15%;
+}
+
+.checkbox label input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon {
+  opacity: 0;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+  opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr {
+  opacity: .5;
+}
 
 /* Layout
 -------------------------------------------------- */
@@ -61,9 +184,9 @@ h4 {
 }
 
 .alert-warning {
-    color: #000;
-    background-color: #fff4ce;
-    border-color: #fff4ce;
+    color: #e3ebf1;
+    background-color: #333333;
+    border-color: #333333;
 }
 
 /* Navigation
@@ -73,8 +196,8 @@ h4 {
 }
 
 .navbar-inverse {
-    background-color: #004880;
-    border-color: #002b4d;
+    background-color: #793939;
+    border-color: #572929;
 }
 
 .navbar {
@@ -101,12 +224,12 @@ h4 {
 }
 
 .navbar-inverse .navbar-nav > .active > a:hover {
-    color: #fff;
+    color: #ffffff;
 }
 
 .navbar-inverse .navbar-nav a.active span {
     padding: 5px 0;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ffffff;
 }
 
 .nav > li {
@@ -131,9 +254,8 @@ h4 {
 
 .search-container button {
   height: 34px;
-  color: #fff;
-  background-color: #d87e00;
-  border-color: #bf6f00;
+  color: #ffffff;
+  background-color: #333333;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -143,8 +265,8 @@ h4 {
 .search-container button:active:hover,
 .search-container button:focus,
 .search-container button:hover {
-  background-color: #a56000;
-  border-color: #814b00;
+  background-color: #4c4c4c;
+  color: #ffffff;
 }
 
 .link-button {
@@ -209,7 +331,7 @@ h4 {
     margin-bottom: 8px;
     margin-left: -5px;
     line-height: 20px;
-    color: #666;
+    color: #ffffff;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -271,20 +393,20 @@ h4 {
 .tabbed-info li a {
     padding: 5px 10px;
     margin: 0;
-    color: #000;
-    background-color: #eaeaea;
+    color: #e3ebf1;
+    background-color: #333333;
     border: 0;
     position: relative;
     display: block;
     text-decoration: none;
-}
+  }
 
 .tabbed-info li.active a {
     font-weight: 600;
-    color: #fff;
+    color: #e3ebf1;
     text-decoration: underline;
-    background-color: #002440;
-}
+    background-color: #793939;
+  }
 
 .tabbed-info .content {
     display: table;
@@ -298,9 +420,9 @@ h4 {
     padding: 0 10px 8px 10px;
     font-family: Consolas, Menlo, Monaco, "Courier New", monospace;
     line-height: 1.5;
-    color: #fff;
-    background-color: #002440;
-    border-color: #002440;
+    color: #e3ebf1;
+    background-color: #793939;
+    border-color: #793939;
     border-style: solid;
     border-width: 1px 0 1px 1px;
 }
@@ -378,7 +500,7 @@ h4 {
 }
 
 .display-package .expandable-section h2 button {
-    color: #000;
+    color: #ffffff;
     text-decoration: none;
 }
 
