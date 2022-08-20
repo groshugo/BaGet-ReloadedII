@@ -82,6 +82,14 @@ a:hover, a:focus {
 /* Reloaded Controls
 -------------------------------------------------- */
 
+.reloaded-italic {
+  font-style: italic;
+}
+
+.reloaded-bold {
+  font-weight: bold;
+}
+
 .checkbox label:after {
   content: '';
   display: table;
