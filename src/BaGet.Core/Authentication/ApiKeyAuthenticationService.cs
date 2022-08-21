@@ -20,7 +20,7 @@ namespace BaGet.Core
         public bool Authenticate(string apiKey, string packageKey)
         {
             // Check Master Key
-            if (_apiKey == apiKey)
+            if (!string.IsNullOrEmpty(_apiKey) && _apiKey == apiKey)
                 return true;
 
             // Check Optional Package Key
