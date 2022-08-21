@@ -27,8 +27,8 @@ This is a fork of BaGet, specifically intended to be used with Reloaded-II mods.
 
 - Themed.  
 - Supports HTTPS.  
+- Supports Response Compression.  
 - Upstream with latest .NET Runtime.  
-- Support for icons for R-II mods.  
 - Returns readme & changelog in search.  
 - Custom auth. Associates each package with key at first upload.  
 
