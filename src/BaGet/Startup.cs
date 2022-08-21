@@ -52,6 +52,7 @@ namespace BaGet
             services.AddSingleton<IConfigureOptions<MvcRazorRuntimeCompilationOptions>, ConfigureRazorRuntimeCompilation>();
             
             services.AddLettuceEncrypt();
+            services.AddResponseCompression(options => options.EnableForHttps = true);
             services.AddCors();
         }
 
@@ -104,6 +105,7 @@ namespace BaGet
 
             // Reloaded-II Stuff
             app.UseHttpsRedirection();
+            app.UseResponseCompression();
         }
     }
 }
