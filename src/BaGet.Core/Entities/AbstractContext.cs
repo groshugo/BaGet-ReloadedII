@@ -91,10 +91,8 @@ namespace BaGet.Core
                 .HasConversion(UriToStringConverter.Instance)
                 .HasMaxLength(DefaultMaxStringLength);
 
-            package.Property(p => p.Tags)
-                .HasMaxLength(DefaultMaxStringLength)
-                .HasConversion(StringArrayToJsonConverter.Instance)
-                .Metadata.SetValueComparer(StringArrayComparer.Instance);
+            package.Property(p => p.TagsString)
+                .HasMaxLength(DefaultMaxStringLength);
 
             package.Property(p => p.Description).HasMaxLength(DefaultMaxStringLength);
             package.Property(p => p.Language).HasMaxLength(MaxPackageLanguageLength);

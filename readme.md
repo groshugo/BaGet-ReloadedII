@@ -31,6 +31,7 @@ This is a fork of BaGet, specifically intended to be used with Reloaded-II mods.
 - Upstream with latest .NET Runtime.  
 - Returns readme & changelog in search.  
 - Custom auth. Associates each package with key at first upload.  
+- Search by tag & title.  
 
 ### Setup Instructions
 Based on Ubuntu Server 22.04.  

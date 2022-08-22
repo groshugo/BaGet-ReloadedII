@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using NuGet.Versioning;
 
 namespace BaGet.Core
@@ -56,7 +58,15 @@ namespace BaGet.Core
         public Uri RepositoryUrl { get; set; }
         public string RepositoryType { get; set; }
 
-        public string[] Tags { get; set; }
+        [Column("Tags")]
+        public string TagsString { get; set; }
+
+        [NotMapped]
+        public string[] Tags
+        {
+            get => JsonConvert.DeserializeObject<string[]>(TagsString);
+            set => TagsString = JsonConvert.SerializeObject(value);
+        }
 
         /// <summary>
         /// Used for optimistic concurrency.

@@ -154,7 +154,9 @@ namespace BaGet.Core
 
             search = search.ToLowerInvariant();
 
-            return query.Where(p => p.Id.ToLower().Contains(search));
+            return query.Where(p => p.Id.ToLower().Contains(search) ||
+                                    p.TagsString.ToLower().Contains(search) ||
+                                    p.Title.ToLower().Contains(search));
         }
 
         private IQueryable<Package> ApplySearchFilters(
