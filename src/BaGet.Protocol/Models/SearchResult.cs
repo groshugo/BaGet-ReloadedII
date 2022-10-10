@@ -6,7 +6,7 @@ namespace BaGet.Protocol.Models
 {
     /// <summary>
     /// A package that matched a search query.
-    /// 
+    ///
     /// See https://docs.microsoft.com/en-us/nuget/api/search-query-service-resource#search-result
     /// </summary>
     public class SearchResult
@@ -60,6 +60,12 @@ namespace BaGet.Protocol.Models
         /// </summary>
         [JsonPropertyName("projectUrl")]
         public string ProjectUrl { get; set; }
+
+        /// <summary>
+        /// The URL of the matched package's homepage.
+        /// </summary>
+        [JsonPropertyName("readmeUrl")]
+        public string ReadmeUrl { get; set; }
 
         /// <summary>
         /// The URL for the matched package's registration index.

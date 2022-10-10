@@ -26,6 +26,9 @@ namespace BaGet.Core
                     ? _url.GetPackageIconDownloadUrl(latest.Id, latest.Version)
                     : latest.IconUrlString;
 
+                var readmeUrl = latest.HasReadme ?
+                    _url.GetPackageReadmeDownloadUrl(latest.Id, latest.Version) : "";
+
                 result.Add(new SearchResult
                 {
                     PackageId = latest.Id,
@@ -33,6 +36,7 @@ namespace BaGet.Core
                     Description = latest.Description,
                     Authors = latest.Authors,
                     IconUrl = iconUrl,
+                    ReadmeUrl = readmeUrl,
                     LicenseUrl = latest.LicenseUrlString,
                     ProjectUrl = latest.ProjectUrlString,
                     RegistrationIndexUrl = _url.GetRegistrationIndexUrl(latest.Id),
