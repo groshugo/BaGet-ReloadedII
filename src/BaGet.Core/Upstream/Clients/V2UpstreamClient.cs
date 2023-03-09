@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BaGet.Core.Entities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NuGet.Common;
@@ -152,10 +153,11 @@ namespace BaGet.Core
                 RepositoryUrl = null,
                 RepositoryType = null,
                 Tags = package.Tags?.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries),
-
                 Dependencies = ToDependencies(package)
             };
         }
+
+
 
         private string[] ParseAuthors(string authors)
         {

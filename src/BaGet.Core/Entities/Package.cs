@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BaGet.Core.Entities;
 using Newtonsoft.Json;
 using NuGet.Versioning;
 
@@ -85,5 +86,9 @@ namespace BaGet.Core
         public string LicenseUrlString => LicenseUrl?.AbsoluteUri ?? string.Empty;
         public string ProjectUrlString => ProjectUrl?.AbsoluteUri ?? string.Empty;
         public string RepositoryUrlString => RepositoryUrl?.AbsoluteUri ?? string.Empty;
+
+        // New metadata fields
+        public int? LocationId { get; set; }
+        public List<PackageLocation> Locations { get; set; }
     }
 }

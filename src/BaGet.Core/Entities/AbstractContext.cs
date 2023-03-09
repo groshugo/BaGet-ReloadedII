@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using BaGet.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -29,6 +30,7 @@ namespace BaGet.Core
         public DbSet<PackageDependency> PackageDependencies { get; set; }
         public DbSet<PackageType> PackageTypes { get; set; }
         public DbSet<TargetFramework> TargetFrameworks { get; set; }
+        public DbSet<PackageLocation> PackageLocations { get; set; }
 
         public Task<int> SaveChangesAsync() => SaveChangesAsync(default);
 
