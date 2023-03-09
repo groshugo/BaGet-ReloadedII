@@ -1,3 +1,4 @@
+using System.Reflection.Emit;
 using System.Threading;
 using System.Threading.Tasks;
 using BaGet.Core.Entities;
@@ -128,6 +129,10 @@ namespace BaGet.Core
                 .IsRequired();
 
             package.Property(p => p.RowVersion).IsRowVersion();
+
+            package.HasMany(p => p.Locations)
+                 .WithOne(d => d.Package);
+
         }
 
         private void BuildPackageDependencyEntity(EntityTypeBuilder<PackageDependency> dependency)
@@ -155,6 +160,12 @@ namespace BaGet.Core
             targetFramework.HasIndex(f => f.Moniker);
 
             targetFramework.Property(f => f.Moniker).HasMaxLength(MaxTargetFrameworkLength);
+        }
+
+        private void BuildPackageLocationEntity(EntityTypeBuilder<PackageLocation> location)
+        {
+            location.HasKey(f => f.Key);
+            location.HasIndex(f => f.Name);
         }
     }
 }
