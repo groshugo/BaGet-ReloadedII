@@ -38,8 +38,8 @@ namespace BaGet.Protocol.Models
         /// <summary>
         /// The dependencies of the package, grouped by target framework.
         /// </summary>
-        [JsonPropertyName("dependencyGroups")]
-        public IReadOnlyList<DependencyGroupItem> DependencyGroups { get; set; }
+        [JsonPropertyName("locations")]
+        public IReadOnlyList<LocationItem> Locations { get; set; }
 
         /// <summary>
         /// The deprecation associated with the package, if any.
@@ -125,5 +125,9 @@ namespace BaGet.Protocol.Models
         /// </summary>
         [JsonPropertyName("title")]
         public string Title { get; set; }
+
+        [JsonPropertyName("dependencies")]
+        public IReadOnlyList<DependencyGroupItem> DependencyGroups{ get; set; }
+
     }
 }

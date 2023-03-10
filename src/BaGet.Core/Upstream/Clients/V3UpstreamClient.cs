@@ -8,6 +8,7 @@ using BaGet.Protocol;
 using BaGet.Protocol.Models;
 using NuGet.Versioning;
 using Microsoft.Extensions.Logging;
+using BaGet.Core.Entities;
 
 namespace BaGet.Core
 {
@@ -113,9 +114,24 @@ namespace BaGet.Core
                 SemVerLevel = version.IsSemVer2 ? SemVerLevel.SemVer2 : SemVerLevel.Unknown,
                 Tags = metadata.Tags?.ToArray() ?? Array.Empty<string>(),
 
-                Dependencies = ToDependencies(metadata)
+                Dependencies = ToDependencies(metadata),
+                Locations = ToLocations(metadata)
             };
         }
+
+        private List<PackageLocation> ToLocations(PackageMetadata package)
+        {
+            if (package.Locations.Count  == 0)
+            {
+                return new List<PackageLocation>();
+            }
+
+            return package.Locations
+                .Select(x => new PackageLocation() { Name = x.Id, Cities = x.Citys })
+                .ToList();
+        }
+
+
 
         private Uri ParseUri(string uriString)
         {
