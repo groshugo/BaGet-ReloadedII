@@ -11,16 +11,13 @@ namespace BaGet.Protocol.Models
     /// </summary>
     public class LocationItem
     {
-        /// <summary>
-        /// The ID of the package dependency.
-        /// </summary>
-        [JsonPropertyName("country")]
-        public string Id { get; set; }
+        [JsonPropertyName("sites")]
+        public string Name { get; set; }
 
         /// <summary>
         /// The allowed version range of the dependency.
         /// </summary>
-        [JsonPropertyName("citys")]
-        public List<string> Citys { get; set; }
+        [JsonPropertyName("sites")]
+        public ICollection<string> Sites { get; set; }
     }
 }

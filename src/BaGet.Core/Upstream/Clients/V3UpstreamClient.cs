@@ -113,7 +113,6 @@ namespace BaGet.Core
                 RepositoryType = null,
                 SemVerLevel = version.IsSemVer2 ? SemVerLevel.SemVer2 : SemVerLevel.Unknown,
                 Tags = metadata.Tags?.ToArray() ?? Array.Empty<string>(),
-
                 Dependencies = ToDependencies(metadata),
                 Locations = ToLocations(metadata)
             };
@@ -127,7 +126,7 @@ namespace BaGet.Core
             }
 
             return package.Locations
-                .Select(x => new PackageLocation() { Name = x.Id, Cities = x.Citys })
+                .Select(x => new PackageLocation() { Name = x.Name, Sites = x.Sites })
                 .ToList();
         }
 
